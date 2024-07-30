@@ -65,7 +65,7 @@ namespace WebApplication2.Controllers
             if (listOfStudent == null || !listOfStudent.Any())
             {
                 return NotFound();
-            }
+        }
             return Ok(listOfStudent);
         }
 
@@ -126,16 +126,16 @@ namespace WebApplication2.Controllers
             return false;
         }
 
-        [HttpDelete]
+        [HttpDelete] 
         public IActionResult DeleteStudent(int id)
         {
             var student = FindStudentById(id);
-            if (student != null)
-            {
-                listOfStudent.Remove(student);
-                return Ok(listOfStudent);
-            }
-            return NotFound();
+           if (student != null)
+           {
+               listOfStudent.Remove(student);
+               return Ok(listOfStudent);
+           }
+           return NotFound();
         }
 
     }
