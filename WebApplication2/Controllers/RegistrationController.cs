@@ -19,7 +19,7 @@ namespace WebApplication2.Controllers
         void FillStudents()
         {
             students = new List<Student>();
-            for(int i=0;i<20;i++)
+            for (int i = 0; i < 20; i++)
             {
                 var student = new Student();
                 student.Id = i;
@@ -58,25 +58,27 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Register(Registration registration)
         {
-            if(registration==null || registration.StudentId < 1 || registration.CourseId < 1)
+            if (registration == null || registration.StudentId < 1 || registration.CourseId < 1)
             {
                 return BadRequest("invalid registration form");
             }
             var student = students.FirstOrDefault(x => x.Id == registration.StudentId);
             var course = Courses.FirstOrDefault(x => x.Id == registration.CourseId);
-            if(student==null)
+            if (student == null)
             {
                 return NotFound("Student not found");
             }
-            if(course==null)
+            if (course == null)
             {
                 return NotFound("course not found");
             }
-            var reg = new Registration();
-            reg.CourseId = course.Id;
-            reg.StudentId = student.Id;
-            reg.RegistrationDate = DateTime.Now;
-            return Ok(reg);
+            var registrationModel = new RegistrationModel();
+            registrationModel.StudentId = student.Id;
+            registrationModel.CourseId = course.Id;
+            registrationModel.Student = student;
+            registrationModel.Course = course;
+            registrationModel.RegistrationDate = DateTime.Now;
+            return Ok(registrationModel);
 
         }
     }
