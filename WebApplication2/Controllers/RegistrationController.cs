@@ -94,7 +94,7 @@ namespace WebApplication2.Controllers
             {
                 return NotFound("registeration not found");
             }
-            registration.Remove(student);
+            registration.Remove(register);
             return Ok("registation removed");
         }
     }
