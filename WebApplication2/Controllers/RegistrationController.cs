@@ -9,6 +9,7 @@ namespace WebApplication2.Controllers
     {
         List<Student> students;
         List<Course> Courses;
+        List<Registration> registration;
 
         public RegistrationController()
         {
@@ -72,12 +73,29 @@ namespace WebApplication2.Controllers
             {
                 return NotFound("course not found");
             }
-            var reg = new Registration();
+            var reg = new registrationModel();
             reg.CourseId = course.Id;
             reg.StudentId = student.Id;
+            reg.Course = course;
+            reg.Student = student;
             reg.RegistrationDate = DateTime.Now;
             return Ok(reg);
 
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            if(id<1)
+            {
+                return BadRequest("Invalid Id");
+            }
+            var register = registration.FirstOrDefault(x => x.Id == id);
+            if(register == null)
+            {
+                return NotFound("registeration not found");
+            }
+            students.Remove(student);
+            return Ok("registation removed");
         }
     }
 }
