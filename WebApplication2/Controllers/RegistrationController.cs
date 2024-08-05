@@ -97,5 +97,34 @@ namespace WebApplication2.Controllers
             registration.Remove(register);
             return Ok("registation removed");
         }
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Registration registration)
+        {
+            if (id < 1 || registration == null || registration.StudentId < 1 || registration.CourseId < 1)
+            {
+                return BadRequest("invalid registration form");
+            }
+            var student = students.FirstOrDefault(x => x.Id == registration.StudentId);
+            var course = Courses.FirstOrDefault(x => x.Id == registration.CourseId);
+            if (student == null)
+            {
+                return NotFound("Student not found");
+            }
+            if (course == null)
+            {
+                return NotFound("course not found");
+            }
+            var register = registration.FirstOrDefault(x => x.Id == id);
+            if (register == null)
+            {
+                return NotFound("registeration not found");
+            }
+            register.CourseId = course.Id;
+            register.StudentId = student.Id;
+            register.Course = course;
+            register.Student = student;
+            register.RegistrationDate = DateTime.Now;
+            return Ok(register);
+        }
     }
 }
