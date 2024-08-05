@@ -41,6 +41,7 @@ namespace WebApplication2.Controllers
                 student.Dob = DateTime.Now;
                 student.IsActive = i % 2 == 0;
                 student.Address = new Address();
+                student.Password = "test";
                 student.Address.Street = "street_" + i;
                 student.Address.City = "City_" + i;
                 student.Address.AddressDescription = "Description_" + i;
@@ -81,6 +82,7 @@ namespace WebApplication2.Controllers
             return Ok(result);
         }
 
+        [HttpGet("FindStudentById")]
         private Student? FindStudentById(int id)
         {
             foreach (var st in listOfStudent)
@@ -153,6 +155,8 @@ namespace WebApplication2.Controllers
         //[EmailAddress]
         //public string Email { get; set; }
 
+        [Required]
+        public string Password { get; set; }
         public Address Address { get; set; }
 
         public List<Address> BuildingAddress { get; set; }

@@ -27,6 +27,7 @@ namespace WebApplication2.Controllers
                 student.Dob = DateTime.Now;
                 student.IsActive = i % 2 == 0;
                 student.Address = new Address();
+                student.Password = "test";
                 student.Address.Street = "street_" + i;
                 student.Address.City = "City_" + i;
                 student.Address.AddressDescription = "Description_" + i;
