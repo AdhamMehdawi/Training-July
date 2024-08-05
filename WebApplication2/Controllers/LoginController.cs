@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace WebApplication2.Controllers
 {
@@ -10,6 +11,7 @@ namespace WebApplication2.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
+        private static readonly Dictionary<string, int> _refreshTokens = new();
         private readonly IConfiguration _configuration;
        // private readonly SettingController _settingController;
           public LoginController(IConfiguration configuration)//, SettingController settingController)
@@ -42,10 +44,27 @@ namespace WebApplication2.Controllers
             if (model.Id == student.Id && model.Password == student.Password)
             {
                 var token = GenerateJwtToken(model.Id.ToString());
-                return Ok(new { Token = token });
+                var refreshToken = GenerateRefreshToken();
+                StoreRefreshToken(model.Id, refreshToken);
+                return Ok(new { Token = token, RefreshToken = refreshToken });
             }
 
             return Unauthorized();
+        }
+
+        [HttpPost("refresh")]
+        public IActionResult Refresh([FromBody] RefreshTokenModel model)
+        {
+            
+            var userId = ValidateRefreshToken(model.RefreshToken);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            
+            var newToken = GenerateJwtToken(userId.ToString());
+            return Ok(new { Token = newToken });
         }
 
         private string GenerateJwtToken(string username)
@@ -59,18 +78,59 @@ namespace WebApplication2.Controllers
                 {
                     new Claim(ClaimTypes.Name, username)
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(1).AddMinutes(20),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(randomNumber);
+            }
+            return Convert.ToBase64String(randomNumber);
+        }
+        private void StoreRefreshToken(int userId, string refreshToken)
+        {
+            InMemoryTokenStore.StoreToken(userId, refreshToken);
+        }
+            private int? ValidateRefreshToken(string refreshToken)
+        {
+            return InMemoryTokenStore.ValidateToken(refreshToken);
+        }
+
     }
 
     public class UserLoginModel
     {
         public int  Id { get; set; }
         public string Password { get; set; }
+    }
+    public class RefreshTokenModel
+    {
+        public string RefreshToken { get; set; }
+    }
+
+    public static class InMemoryTokenStore
+    {
+        private static readonly Dictionary<string, int> _refreshTokens = new();
+
+        public static void StoreToken(int userId, string refreshToken)
+        {
+            _refreshTokens[refreshToken] = userId;
+        }
+
+        public static int? ValidateToken(string refreshToken)
+        {
+            if (_refreshTokens.TryGetValue(refreshToken, out var userId))
+            {
+                return userId;
+            }
+            return null;
+        }
     }
 }
