@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +11,7 @@ namespace WebApplication2.Controllers
     {
         List<Student> students;
         List<Course> Courses;
-        List<Registration> registration;
+        List<registrationModel> registrationList;
 
         public RegistrationController()
         {
@@ -89,12 +91,12 @@ namespace WebApplication2.Controllers
             {
                 return BadRequest("Invalid Id");
             }
-            var register = registration.FirstOrDefault(x => x.Id == id);
+            var register = registrationList.FirstOrDefault(x => x.Id == id);
             if(register == null)
             {
                 return NotFound("registeration not found");
             }
-            registration.Remove(register);
+            registrationList.Remove(register);
             return Ok("registation removed");
         }
         [HttpPut("{id}")]
@@ -114,7 +116,7 @@ namespace WebApplication2.Controllers
             {
                 return NotFound("course not found");
             }
-            var register = registration.FirstOrDefault(x => x.Id == id);
+            var register = registrationList.FirstOrDefault(x => x.Id == id);
             if (register == null)
             {
                 return NotFound("registeration not found");
@@ -125,6 +127,15 @@ namespace WebApplication2.Controllers
             register.Student = student;
             register.RegistrationDate = DateTime.Now;
             return Ok(register);
+        }
+
+        [HttpGet("bananan")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        public IActionResult HashCode(int id ,int number ,DateTime date,int cvs)
+        {
+            var hashed =id*10 + number+55 + "csdqwf@#@#@4"+(date+"555") + cvs % 20+"sdasd";
+
+            return Ok(hashed);
         }
     }
 }

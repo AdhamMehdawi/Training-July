@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class SettingController : ControllerBase
     {
         List<Student> listOfStudent;
@@ -60,12 +62,14 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet("Get10Student")]
+        [Authorize]
+
         public IActionResult Get10Student()
         {
             if (listOfStudent == null || !listOfStudent.Any())
             {
                 return NotFound();
-        }
+            }
             return Ok(listOfStudent);
         }
 
@@ -126,16 +130,16 @@ namespace WebApplication2.Controllers
             return false;
         }
 
-        [HttpDelete] 
+        [HttpDelete]
         public IActionResult DeleteStudent(int id)
         {
             var student = FindStudentById(id);
-           if (student != null)
-           {
-               listOfStudent.Remove(student);
-               return Ok(listOfStudent);
-           }
-           return NotFound();
+            if (student != null)
+            {
+                listOfStudent.Remove(student);
+                return Ok(listOfStudent);
+            }
+            return NotFound();
         }
 
     }

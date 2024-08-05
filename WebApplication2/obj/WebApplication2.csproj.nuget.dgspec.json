@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\Users\\student\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj": {}
   },
   "projects": {
-    "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\Users\\student\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\student\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
-        "packagesPath": "C:\\Users\\adham.mehdawi\\.nuget\\packages\\",
-        "outputPath": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\obj\\",
+        "projectPath": "C:\\Users\\student\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj",
+        "packagesPath": "C:\\Users\\student\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\student\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\adham.mehdawi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\student\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,12 +35,29 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -69,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
