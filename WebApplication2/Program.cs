@@ -1,6 +1,8 @@
 
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DataAccess;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApplication2
 {
@@ -21,8 +23,10 @@ namespace WebApplication2
             builder.Services.AddDbContext<MyDatabase>(option =>
             {
                 option.UseSqlServer(
-                    "Server=.;Database=SchoolDb101;TrustServerCertificate=True;MultipleActiveResultSets=true;User Id=sa; Password=Admin123#");
+                    "Data Source =.; Initial Catalog = SchoolDb101;TrustServerCertificate=True;MultipleActiveResultSets=true; Integrated Security = True; Encrypt = False");
+                ;
             });
+            
 
             var app = builder.Build();
 

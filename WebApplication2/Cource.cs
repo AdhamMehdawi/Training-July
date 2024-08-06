@@ -21,7 +21,7 @@ namespace WebApplication2
     }
 
 
-    public class RegistrationModel
+    public class RegistrationsModel
     {
         public int StudentId { get; set; }
         public Student Student { get; set; }
