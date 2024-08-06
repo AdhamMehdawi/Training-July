@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApplication2.DataAccess;
 
 namespace WebApplication2.Controllers
 {
@@ -9,8 +11,10 @@ namespace WebApplication2.Controllers
     public class SettingController : ControllerBase
     {
         List<Student> listOfStudent;
+        MyDatabase db;
         public SettingController()
         {
+ 
             FilListOfStudent();
 
             //{

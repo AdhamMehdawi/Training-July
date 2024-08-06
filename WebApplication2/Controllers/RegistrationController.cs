@@ -81,5 +81,21 @@ namespace WebApplication2.Controllers
             return Ok(registrationModel);
 
         }
+
+        [HttpPut]
+        public IActionResult Update([FromQuery]int regId,[FromBody]Registration registration)
+        {
+            //update registration based on teh regid
+            //
+            return Ok();
+        }
+
+        [HttpPut("Update")]
+        public IActionResult Update1([FromHeader] int regId, [FromBody] Registration registration)
+        {
+            //update registration based on teh regid
+            //
+            return Ok();
+        }
     }
 }
