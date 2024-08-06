@@ -130,7 +130,6 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet("bananan")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public IActionResult HashCode(int id ,int number ,DateTime date,int cvs)
         {
             var hashed =id*10 + number+55 + "csdqwf@#@#@4"+(date+"555") + cvs % 20+"sdasd";

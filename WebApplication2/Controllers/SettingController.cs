@@ -14,22 +14,6 @@ namespace WebApplication2.Controllers
         public SettingController()
         {
             FilListOfStudent();
-
-            //{
-            //    "id": "5",
-            //    "name": "Ali",
-            //    "dob": "2024-07-30T09:10:07.510Z",
-            //    "isActive": true
-            //}
-
-            //Student st1=new Student();
-
-            //st1.Id = 5;
-            //st1.Name = "Ali";
-            //st1.Dob = new DateTime(2024, 03, 30);
-            //st1.IsActive = true;
-            //AddStudent(st1);
-
         }
 
         void FilListOfStudent()
@@ -62,8 +46,6 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet("Get10Student")]
-        [Authorize]
-
         public IActionResult Get10Student()
         {
             if (listOfStudent == null || !listOfStudent.Any())

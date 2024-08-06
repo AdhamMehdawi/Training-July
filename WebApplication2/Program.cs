@@ -1,7 +1,9 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebApplication2.Services.Math;
 using WebApplication2.Services.TokenService;
 
 namespace WebApplication2
@@ -31,7 +33,12 @@ namespace WebApplication2
                     };
                 });
 
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
+            builder.Services.AddScoped<TestMath>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<ITokenService, TokenService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
