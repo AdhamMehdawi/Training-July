@@ -2,10 +2,7 @@
 {
     public class TestMath
     {
-        public TestMath(int number)
-        {
-
-        }
+        
         public int Sum(int a, int b)
         {
             return a + b;
