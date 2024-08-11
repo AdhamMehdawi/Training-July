@@ -16,6 +16,8 @@ namespace WebApplication2
         public DbSet<BranchModel> Branches { get; set; }
         public DbSet<RegisterCourseModel> RegisterCourses { get; set; }
         public DbSet<TeacherModel> Teachers { get; set; }
+        public DbSet<CourseTimesModel> CourseTimes { get; set; }
+        public DbSet<HallModel> Halls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,9 +33,13 @@ namespace WebApplication2
                 .HasOne(rs => rs.RegisterCourse)
                 .WithMany(rc => rc.RegisterStudents)
                 .HasForeignKey(rs => rs.RegisterCourseId)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
-
+            modelBuilder.Entity<RegisterCourseModel>()
+                .HasMany(rc => rc.CourseTimes)
+                .WithOne(ct => ct.RegisterCourse)
+                .HasForeignKey(ct => ct.RegisterCourseId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RegisterCourseModel>()
@@ -48,6 +54,12 @@ namespace WebApplication2
                 .WithMany(s => s.RegisterdCourses)
                 .HasForeignKey(rc => rc.SemesterId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<HallModel>()
+                .HasMany(h => h.CourseTimes)
+                .WithOne(ct => ct.Hall)
+                .HasForeignKey(ct => ct.HallId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 

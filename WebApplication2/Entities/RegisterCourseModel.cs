@@ -16,5 +16,6 @@ namespace WebApplication2.Entities
         public SemesterModel Semester { get; set; }
 
         public List<RegisterStudentModel> RegisterStudents { get; set; }
+        public List<CourseTimesModel> CourseTimes { get; set; }
     }
 }

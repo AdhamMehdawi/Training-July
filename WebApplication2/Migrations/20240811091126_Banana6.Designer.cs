@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2;
 
@@ -11,9 +12,11 @@ using WebApplication2;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240811091126_Banana6")]
+    partial class Banana6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,45 +75,20 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("EndTime")
+                    b.Property<TimeOnly>("End")
                         .HasColumnType("time");
-
-                    b.Property<int>("HallId")
-                        .HasColumnType("int");
 
                     b.Property<int>("RegisterCourseId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
+                    b.Property<TimeOnly>("Start")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HallId");
-
                     b.HasIndex("RegisterCourseId");
 
-                    b.ToTable("CourseTimes");
-                });
-
-            modelBuilder.Entity("WebApplication2.Entities.HallModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Halls");
+                    b.ToTable("CourseTimesModel");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.RegisterCourseModel", b =>
@@ -247,19 +225,11 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.Entities.CourseTimesModel", b =>
                 {
-                    b.HasOne("WebApplication2.Entities.HallModel", "Hall")
-                        .WithMany("CourseTimes")
-                        .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebApplication2.Entities.RegisterCourseModel", "RegisterCourse")
                         .WithMany("CourseTimes")
                         .HasForeignKey("RegisterCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Hall");
 
                     b.Navigation("RegisterCourse");
                 });
@@ -326,11 +296,6 @@ namespace WebApplication2.Migrations
             modelBuilder.Entity("WebApplication2.Entities.CourseModel", b =>
                 {
                     b.Navigation("Registrations");
-                });
-
-            modelBuilder.Entity("WebApplication2.Entities.HallModel", b =>
-                {
-                    b.Navigation("CourseTimes");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.RegisterCourseModel", b =>

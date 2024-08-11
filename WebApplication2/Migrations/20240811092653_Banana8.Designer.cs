@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2;
 
@@ -11,9 +12,11 @@ using WebApplication2;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240811092653_Banana8")]
+    partial class Banana8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,7 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("EndTime")
+                    b.Property<TimeOnly>("End")
                         .HasColumnType("time");
 
                     b.Property<int>("HallId")
@@ -81,7 +84,7 @@ namespace WebApplication2.Migrations
                     b.Property<int>("RegisterCourseId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
+                    b.Property<TimeOnly>("Start")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
