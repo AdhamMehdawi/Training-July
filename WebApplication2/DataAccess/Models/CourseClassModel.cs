@@ -6,8 +6,11 @@
         public int CourseId { get; set; }
        public int ClassId { get; set; }
 
+        public int TeacherId { get; set; }
+
         public CourceModel Course { get; set; }
         public ClassModel Class { get; set; }
+        public TeacherModel Teacher { get; set; }
 
 
     }
