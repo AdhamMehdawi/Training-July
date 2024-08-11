@@ -1,4 +1,6 @@
-﻿namespace WebApplication2.DataAccess.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.DataAccess.Models
 {
     public class SemesterModel
     {

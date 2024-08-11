@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public List<RegistrationModel> RegistredStudents { get; set; }
+        public List<SectionCorseModel> SectionCorse { get; set; }
     }
 }
