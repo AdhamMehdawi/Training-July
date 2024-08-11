@@ -26,8 +26,7 @@ namespace WebApplication2
 
             var app = builder.Build();
 
-            MyDatabase test = new MyDatabase(new DbContextOptions<MyDatabase>());
-
+           
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

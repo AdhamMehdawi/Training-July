@@ -161,6 +161,8 @@ namespace WebApplication2.Controllers
 
         public List<Address> BuildingAddress { get; set; }
 
+
+
         //[Phone(ErrorMessage = "")]
         //[RegularExpression("[0-9]*",ErrorMessage = "")]
         //  public bool PhoneNumber { get; set; }
