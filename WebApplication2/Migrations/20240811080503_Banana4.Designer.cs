@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2;
 
@@ -11,9 +12,11 @@ using WebApplication2;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240811080503_Banana4")]
+    partial class Banana4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,12 +113,17 @@ namespace WebApplication2.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("SemesterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RegisterCourseId");
+
+                    b.HasIndex("SemesterId");
 
                     b.HasIndex("StudentId");
 
@@ -235,6 +243,12 @@ namespace WebApplication2.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("WebApplication2.Entities.SemesterModel", "Semester")
+                        .WithMany("Registrations")
+                        .HasForeignKey("SemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApplication2.Entities.StudentModel", "Student")
                         .WithMany("Registrations")
                         .HasForeignKey("StudentId")
@@ -242,6 +256,8 @@ namespace WebApplication2.Migrations
                         .IsRequired();
 
                     b.Navigation("RegisterCourse");
+
+                    b.Navigation("Semester");
 
                     b.Navigation("Student");
                 });
@@ -264,6 +280,8 @@ namespace WebApplication2.Migrations
             modelBuilder.Entity("WebApplication2.Entities.SemesterModel", b =>
                 {
                     b.Navigation("RegisterdCourses");
+
+                    b.Navigation("Registrations");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.StudentModel", b =>

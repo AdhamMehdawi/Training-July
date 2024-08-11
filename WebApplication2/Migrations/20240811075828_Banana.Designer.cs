@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2;
 
@@ -11,9 +12,11 @@ using WebApplication2;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240811075828_Banana")]
+    partial class Banana
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,12 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RegisterCourseId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RegisterCourseId");
 
                     b.ToTable("Branches");
                 });
@@ -74,9 +82,6 @@ namespace WebApplication2.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SemesterId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
@@ -85,8 +90,6 @@ namespace WebApplication2.Migrations
                     b.HasIndex("BranchId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("SemesterId");
 
                     b.HasIndex("TeacherId");
 
@@ -110,12 +113,19 @@ namespace WebApplication2.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("SemesterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("RegisterCourseId");
+
+                    b.HasIndex("SemesterId");
 
                     b.HasIndex("StudentId");
 
@@ -192,24 +202,29 @@ namespace WebApplication2.Migrations
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("WebApplication2.Entities.BranchModel", b =>
+                {
+                    b.HasOne("WebApplication2.Entities.RegisterCourseModel", "RegisterCourse")
+                        .WithMany()
+                        .HasForeignKey("RegisterCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RegisterCourse");
+                });
+
             modelBuilder.Entity("WebApplication2.Entities.RegisterCourseModel", b =>
                 {
                     b.HasOne("WebApplication2.Entities.BranchModel", "Branch")
-                        .WithMany("RegisterCourse")
+                        .WithMany()
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebApplication2.Entities.CourseModel", "Course")
                         .WithMany("Registrations")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication2.Entities.SemesterModel", "Semester")
-                        .WithMany("RegisterdCourses")
-                        .HasForeignKey("SemesterId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WebApplication2.Entities.TeacherModel", "Teacher")
@@ -222,17 +237,27 @@ namespace WebApplication2.Migrations
 
                     b.Navigation("Course");
 
-                    b.Navigation("Semester");
-
                     b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.RegisterStudentModel", b =>
                 {
+                    b.HasOne("WebApplication2.Entities.BranchModel", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApplication2.Entities.RegisterCourseModel", "RegisterCourse")
                         .WithMany("RegisterStudents")
                         .HasForeignKey("RegisterCourseId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication2.Entities.SemesterModel", "Semester")
+                        .WithMany("Registrations")
+                        .HasForeignKey("SemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebApplication2.Entities.StudentModel", "Student")
@@ -241,14 +266,13 @@ namespace WebApplication2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Branch");
+
                     b.Navigation("RegisterCourse");
+
+                    b.Navigation("Semester");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("WebApplication2.Entities.BranchModel", b =>
-                {
-                    b.Navigation("RegisterCourse");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.CourseModel", b =>
@@ -263,7 +287,7 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.Entities.SemesterModel", b =>
                 {
-                    b.Navigation("RegisterdCourses");
+                    b.Navigation("Registrations");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.StudentModel", b =>
