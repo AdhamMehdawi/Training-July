@@ -75,8 +75,7 @@ namespace WebApplication2.Controllers
             var registrationModel = new WebApplication2.DataAccess.Models.RegistrationModel();
             registrationModel.StudentId = student.Id;
             registrationModel.CourseId = course.Id;
-            registrationModel.Student = student;
-            registrationModel.Course = course;
+            
             registrationModel.RegistrationDate = DateTime.Now;
             return Ok(registrationModel);
 
