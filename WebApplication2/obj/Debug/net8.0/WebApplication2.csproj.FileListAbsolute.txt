@@ -135,3 +135,14 @@ D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.pdb
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.genruntimeconfig.cache
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\ref\WebApplication2.dll
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.csproj.AssemblyReference.cache
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.AssemblyInfoInputs.cache
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.AssemblyInfo.cs
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.csproj.CoreCompileInputs.cache
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.sourcelink.json
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.dll
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\refint\WebApplication2.dll
+C:\Users\novo\Documents\GitHub\Training-July\WebApplication2\obj\Debug\net8.0\WebApplication2.pdb

@@ -15,7 +15,7 @@ namespace WebApplication2.DataAccess
         DbSet<RegistrationModel> Registration { get; set; }
         DbSet<SemesterModel> Semesters { get; set; }
 
-
+        DbSet<ClassModel> Classes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -36,6 +36,10 @@ namespace WebApplication2.DataAccess
                 builder.HasOne(c => c.SemesterModel)
                     .WithMany(c => c.Registration)
                     .HasForeignKey(c => c.SemesterId);
+
+                builder.HasOne(c => c.Classes)
+                    .WithMany(c => c.RegistredStudents)
+                    .HasForeignKey(c => c.ClassId);
 
             });
         }

@@ -72,7 +72,7 @@ namespace WebApplication2.Controllers
             {
                 return NotFound("course not found");
             }
-            var registrationModel = new RegistrationModel();
+            var registrationModel = new WebApplication2.DataAccess.Models.RegistrationModel();
             registrationModel.StudentId = student.Id;
             registrationModel.CourseId = course.Id;
             registrationModel.Student = student;
