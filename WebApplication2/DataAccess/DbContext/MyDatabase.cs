@@ -15,7 +15,7 @@ namespace WebApplication2.DataAccess
         DbSet<RegistrationModel> Registration { get; set; }
         DbSet<SemesterModel> Semesters { get; set; }
         public DbSet<SectionModel> Section { get; set; }
-        DbSet<SectionCorseModel> SectionCourse { get; set; }
+       public DbSet<SectionCorseModel> SectionCourse { get; set; }
         DbSet<TeacherModel> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

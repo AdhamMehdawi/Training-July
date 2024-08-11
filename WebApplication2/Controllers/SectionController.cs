@@ -65,16 +65,24 @@ namespace WebApplication2.Controllers
             _context.SaveChanges();
             return Ok();
         }
+
         [HttpPut("UpdateSection")]
         public IActionResult Update(SsectionDT section)
         {
-
+            if(section == null)
+            {
+                return BadRequest();
+            }
+            if(section.Id <= 0)
+            {
+                return BadRequest();
+            }
             var cor= _context.Section.Find(section.Id);
             if (cor == null)
             {
                 return NotFound();
             }
-            cor.Id = section.Id;
+            
             cor.Name=section.Name;   
             _context.SaveChanges();
 
