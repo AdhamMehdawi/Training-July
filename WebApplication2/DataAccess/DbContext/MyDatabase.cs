@@ -16,7 +16,7 @@ namespace WebApplication2.DataAccess
         DbSet<SemesterModel> Semesters { get; set; }
         DbSet<SectionModel> Section { get; set; }
         DbSet<SectionCorseModel> SectionCourse { get; set; }
-
+        DbSet<TeacherModel> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,14 @@ namespace WebApplication2.DataAccess
             modelBuilder.Entity<SemesterModel>(table =>
             {
                 table.HasKey(c => c.SemesterNumber);
+            });
+
+
+            modelBuilder.Entity<TeacherModel>(table =>
+            {
+                table.HasMany(c => c.Courses)
+                    .WithOne(c => c.Teacher)
+                    .HasForeignKey(c => c.TeacherId);
             });
 
         }
