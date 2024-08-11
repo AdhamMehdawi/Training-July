@@ -16,6 +16,10 @@ namespace WebApplication2.DataAccess
         DbSet<SemesterModel> Semesters { get; set; }
 
         DbSet<ClassModel> Classes { get; set; }
+
+        DbSet<CourseClassModel> CourseClasses { get; set; }
+
+        DbSet<TeacherModel> Teachers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -41,7 +45,28 @@ namespace WebApplication2.DataAccess
                     .WithMany(c => c.RegistredStudents)
                     .HasForeignKey(c => c.ClassId);
 
+                
+
+
+
             });
+            modelBuilder.Entity<CourseClassModel>(builder =>
+            {
+                builder.HasOne(c => c.Course)
+                .WithMany(c => c.Classes)
+                .HasForeignKey(c => c.CourseId);
+
+                builder.HasOne(c => c.Class)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(c => c.ClassId);
+
+                builder.HasOne(c => c.Teacher)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(c => c.TeacherId);
+
+
+            });
+          
         }
     }
 

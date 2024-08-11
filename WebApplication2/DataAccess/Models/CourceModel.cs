@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public List<RegistrationModel> RegistredStudents { get; set; }
 
-       
+        public List<CourseClassModel> Classes { get; set; }
+
+
     }
 }

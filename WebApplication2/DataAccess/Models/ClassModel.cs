@@ -8,5 +8,6 @@
         public DateTime creadetAt { get; set; }
 
         public List<RegistrationModel> RegistredStudents { get; set; }
+        public List<CourseClassModel> Courses { get; set; }
     }
 }
