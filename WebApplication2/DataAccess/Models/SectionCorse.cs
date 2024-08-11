@@ -12,6 +12,7 @@
         public SectionModel Section { get; set; } 
         public int TeacherId { get; set; }
         public TeacherModel Teacher { get; set; }
+        public List<RegistrationModel> RegistredStudents { get; set; }
 
     }
 }

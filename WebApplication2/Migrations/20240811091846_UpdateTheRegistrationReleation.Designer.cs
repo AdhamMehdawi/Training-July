@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.DataAccess;
 
@@ -11,9 +12,11 @@ using WebApplication2.DataAccess;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(MyDatabase))]
-    partial class MyDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20240811091846_UpdateTheRegistrationReleation")]
+    partial class UpdateTheRegistrationReleation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,33 +122,6 @@ namespace WebApplication2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Section");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "A1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "A2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "A4"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "A4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "A5"
-                        });
                 });
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>

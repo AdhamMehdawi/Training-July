@@ -30,9 +30,9 @@ namespace WebApplication2.DataAccess
                     .WithMany(c => c.RegistredCources)
                     .HasForeignKey(c => c.StudentId);
 
-                builder.HasOne(c => c.CourceModel)
+                builder.HasOne(c => c.SectionCourse)
                     .WithMany(c => c.RegistredStudents)
-                    .HasForeignKey(c => c.CourceId);
+                    .HasForeignKey(c => c.SectionCourseId);
 
 
                 builder.HasOne(c => c.SemesterModel)
@@ -46,6 +46,36 @@ namespace WebApplication2.DataAccess
                 builder.HasMany(c => c.CourseSection)
                     .WithOne(c => c.Section)
                     .HasForeignKey(c => c.SectionId);
+
+                builder.HasData(new List<SectionModel>()
+                {
+                    new SectionModel()
+                    {
+                        Id = 1,
+                        Name = "A1"
+                    },
+                    new SectionModel()
+                    {
+                        Id = 2,
+                        Name = "A2"
+                    },
+                    new SectionModel()
+                    {
+                        Id = 3,
+                        Name = "A4"
+                    },
+                    new SectionModel()
+                    {
+                        Id = 4,
+                        Name = "A4"
+                    },
+                    new SectionModel()
+                    {
+                        Id = 5,
+                        Name = "A5"
+                    },
+                });
+
             });
 
             modelBuilder.Entity<CourceModel>(table =>
