@@ -89,6 +89,55 @@ namespace WebApplication2.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost("Registration")]
+        public IActionResult RegisterStudent([FromBody] RegDto reg)
+        {
+            //validate the student id 
+            if (!_database.Students.Any(c=>c.Id == reg.StudentId))
+            {
+                return BadRequest("The student Id does not exists!!");
+            }
+            if (!_database.Cources.Any(c => c.Id == reg.CourseId))
+            {
+                return BadRequest("The course Id does not exists!!");
+            }
+            //1. try to get the section course using the course id 
+            var listOfSectionCourse= _database.SectionCourse
+                .Where(c => c.courseId == reg.CourseId).ToList();
+            int sectionCourseId = 0;
+           if (listOfSectionCourse.Any())
+           {
+               sectionCourseId= listOfSectionCourse.FirstOrDefault().Id;
+           }
+           else // no data in the section course 
+           {
+               //create a new row for the section course 
+               var sectionCourse = new SectionCorseModel()
+               {
+                   SectionId = 1,
+                   TeacherId = 1,
+                   courseId = 1,
+                   StartTime = TimeSpan.FromDays(1),
+                   EndTime = TimeSpan.FromDays(2)
+               };
+               _database.SectionCourse.Add(sectionCourse);
+               _database.SaveChanges();
+               sectionCourseId= sectionCourse.Id;
+           }
+           //2. insert into the registration table 
+           _database.Registration.Add(new RegistrationModel()
+           {
+               StudentId = reg.StudentId,
+               SemesterId = 1,
+               SectionCourseId = sectionCourseId,
+               RegistrationDate = DateTime.Now
+           });
+           _database.SaveChanges();
+
+            return Ok();
+        }
+
     }
 
 
