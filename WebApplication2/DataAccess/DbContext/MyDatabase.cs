@@ -83,11 +83,28 @@ namespace WebApplication2.DataAccess
                 table.HasMany(c => c.SectionCorse)
                     .WithOne(c => c.course)
                     .HasForeignKey(key => key.courseId);
+
+                table.HasData(new List<CourceModel>()
+                {
+                    new CourceModel()
+                    {
+                        Id = 1001,
+                        Name = "C++"
+                    }
+                });
             });
 
             modelBuilder.Entity<SemesterModel>(table =>
             {
                 table.HasKey(c => c.SemesterNumber);
+                table.HasData(new List<SemesterModel>()
+                {
+                    new SemesterModel()
+                    {
+                        SemesterNumber = 1,
+                        SemesterName = "A1"
+                    }
+                });
             });
 
 
@@ -96,8 +113,32 @@ namespace WebApplication2.DataAccess
                 table.HasMany(c => c.Courses)
                     .WithOne(c => c.Teacher)
                     .HasForeignKey(c => c.TeacherId);
+
+                table.HasData(new List<TeacherModel>()
+                {
+                    new TeacherModel()
+                    {
+                        Id = 1,
+                        FullName = "T1"
+                    }
+                });
             });
 
+
+            modelBuilder.Entity<StudentModel>(table =>
+            {
+                table.HasData(new List<StudentModel>()
+                {
+                    new StudentModel()
+                    {
+                        Id = 1,
+                        City = "Ramallah",
+                        Name = "Ali",
+                        Email = "test@gmail.com",
+                        PhoneNumber = "000000000000"
+                    }
+                });
+            });
         }
     }
 
