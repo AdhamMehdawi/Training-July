@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication2.Application.DtoModels;
 using WebApplication2.DataAccess;
 using WebApplication2.DataAccess.Models;
@@ -13,29 +14,31 @@ namespace WebApplication2.Controllers
         private MyDatabase _database;
         public LookupsController(MyDatabase database)
         {
-            _database= database;
+            _database = database;
         }
 
         [HttpGet("GetSections")]
         public IActionResult GetSections()
-        { 
+        {
             return Ok(_database.Section.ToList());
         }
 
         [HttpGet("SearchByName")]
-        public IActionResult SearchByName([FromQuery]string name)
+        public IActionResult SearchByName([FromQuery] string name, [FromQuery] int a)
         {
             var results = _database.Section
                 .Where(c => c.Name.Contains(name))
-                .ToList();
-            return Ok(results);
+                .ToList(); 
+            if (a == 1)
+                return Ok(results);
+            return Ok("Please send a as a 1");
         }
 
 
         [HttpPost("Create")]
         public IActionResult CreateSection(SectionDto section)
         {
-            var sectionModel= new SectionModel();
+            var sectionModel = new SectionModel();
             sectionModel.Id = section.Id;
             sectionModel.Name = section.Name;
             _database.Section.Add(sectionModel);
@@ -54,8 +57,8 @@ namespace WebApplication2.Controllers
                 section.Name = sectionDto.Name;
                 _database.SaveChanges();
                 return Accepted();
-            } 
-            return BadRequest("Incorrect Id value"); 
+            }
+            return BadRequest("Incorrect Id value");
         }
 
 
@@ -65,10 +68,10 @@ namespace WebApplication2.Controllers
         {
             if (sectionId > 0)
             {
-              var section=  _database.Section.Find(sectionId);
-              if (section == null) return NotFound();
-              _database.Section.Remove(section);
-              _database.SaveChanges();
+                var section = _database.Section.Find(sectionId);
+                if (section == null) return NotFound();
+                _database.Section.Remove(section);
+                _database.SaveChanges();
             }
             return Ok();
         }
