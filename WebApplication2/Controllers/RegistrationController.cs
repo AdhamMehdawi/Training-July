@@ -3,6 +3,7 @@ using WebApplication2.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using WebApplication2.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
 {
@@ -27,7 +28,6 @@ namespace WebApplication2.Controllers
                     StudentId = rs.StudentId,
                     RegisterCourseId = rs.RegisterCourseId,
                     RegistrationDate = rs.RegistrationDate,
-                    BranchId = rs.BranchId
                 })
                 .ToList();
 
@@ -44,7 +44,6 @@ namespace WebApplication2.Controllers
                     StudentId = rs.StudentId,
                     RegisterCourseId = rs.RegisterCourseId,
                     RegistrationDate = rs.RegistrationDate,
-                    BranchId = rs.BranchId
                 })
                 .FirstOrDefault(rs => rs.Id == id);
 
@@ -69,7 +68,6 @@ namespace WebApplication2.Controllers
                 StudentId = registerStudentModelDTO.StudentId,
                 RegisterCourseId = registerStudentModelDTO.RegisterCourseId,
                 RegistrationDate = registerStudentModelDTO.RegistrationDate,
-                BranchId = registerStudentModelDTO.BranchId
             };
 
             _context.Registrations.Add(registerStudent);
@@ -97,7 +95,6 @@ namespace WebApplication2.Controllers
             existingRegisterStudent.StudentId = registerStudentModelDTO.StudentId;
             existingRegisterStudent.RegisterCourseId = registerStudentModelDTO.RegisterCourseId;
             existingRegisterStudent.RegistrationDate = registerStudentModelDTO.RegistrationDate;
-            existingRegisterStudent.BranchId = registerStudentModelDTO.BranchId;
 
             _context.SaveChanges();
 
@@ -118,5 +115,31 @@ namespace WebApplication2.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("GetAllWithNames")]
+        public ActionResult<IEnumerable<object>> GetAllWithNames()
+        {
+            var registerStudents = _context.Registrations
+                .Include(rs => rs.Student)
+                .Include(rs => rs.RegisterCourse)
+                .ThenInclude(rc => rc.Course)
+                .Select(rs => new
+                {
+                    Id = rs.Id,
+                    StudentId = rs.StudentId,
+                    StudentName = rs.Student.Name,
+                    StudentEmail = rs.Student.Email,
+                    CourseId = rs.RegisterCourse.Course.Id,  
+                    CourseName = rs.RegisterCourse.Course.Name,  
+                    CourseDescription = rs.RegisterCourse.Course.Description, 
+                    RegistrationDate = rs.RegistrationDate,
+                })
+                .ToList();
+
+            return Ok(registerStudents);
+        }
+
+
+
     }
 }

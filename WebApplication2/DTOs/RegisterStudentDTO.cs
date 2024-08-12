@@ -6,6 +6,5 @@
         public int StudentId { get; set; }
         public int RegisterCourseId { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public int BranchId { get; set; }
     }
 }
