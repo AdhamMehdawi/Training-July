@@ -22,6 +22,15 @@ namespace WebApplication2.Controllers
             return Ok(_database.Section.ToList());
         }
 
+        [HttpGet("SearchByName")]
+        public IActionResult SearchByName([FromQuery]string name)
+        {
+            var results = _database.Section
+                .Where(c => c.Name.Contains(name))
+                .ToList();
+            return Ok(results);
+        }
+
 
         [HttpPost("Create")]
         public IActionResult CreateSection(SectionDto section)
