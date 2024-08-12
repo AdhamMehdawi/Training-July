@@ -63,7 +63,6 @@ namespace WebApplication2.Controllers
 
 
         [HttpDelete("Delete")]
-
         public IActionResult DeleteSection(int sectionId)
         {
             if (sectionId > 0)
@@ -76,6 +75,26 @@ namespace WebApplication2.Controllers
             return Ok();
         }
 
+        [HttpGet("GetStudents")]
+        public IActionResult GetStudents()
+        {
+            var result=_database.Students
+                .Where(c=>c.Id > 0)
+                .Select(c=>new StudentData
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                });
+            var queryString = result.ToQueryString();
+            return Ok(result);
+        }
 
+    }
+
+
+    public class StudentData
+    {
+        public int Id { get; set; } 
+        public string Name { get; set; } 
     }
 }
