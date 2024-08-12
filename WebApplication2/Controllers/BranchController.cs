@@ -3,6 +3,7 @@ using WebApplication2.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using WebApplication2.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
 {
@@ -49,6 +50,27 @@ namespace WebApplication2.Controllers
 
             return Ok(branch);
         }
+        [HttpGet("ByName")]
+        public async Task<ActionResult<List<BranchDTO>>> GetByName([FromQuery] string name)
+        {
+            var branches = await _context.Branches
+                .Where(b => b.Name.ToLower().Contains(name.ToLower()))
+                .Select(b => new BranchDTO
+                {
+                    Id = b.Id,
+                    Name = b.Name
+                }).ToListAsync();
+                
+
+            if (branches == null || branches.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(branches);
+        }
+
+
 
         [HttpPost]
         public ActionResult<BranchDTO> Post([FromBody] BranchDTO branchModelDTO)

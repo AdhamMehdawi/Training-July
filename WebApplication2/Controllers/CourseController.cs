@@ -34,7 +34,7 @@ namespace WebApplication2.Controllers
 
         [HttpGet("{id}")]
         public ActionResult<CourseDTO> Get(int id)
-        {
+        {   
             var course = _context.Courses
                 .Select(c => new CourseDTO
                 {

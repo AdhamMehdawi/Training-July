@@ -3,6 +3,7 @@ using WebApplication2.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using WebApplication2.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
 {
@@ -118,5 +119,32 @@ namespace WebApplication2.Controllers
 
             return NoContent();
         }
+        [HttpGet("GetStudentsByTeacherAndCourse")]
+        public async Task<ActionResult<List<StudentDTO>>> GetStudentsByTeacherAndCourse(string teacherName, string courseName)
+        {
+            var students = await _context.Students
+                .Include(s => s.Registrations)
+                .ThenInclude(r => r.RegisterCourse)
+                .ThenInclude(c => c.Teacher)
+                .Where(s => s.Registrations.Any(r =>
+                    r.RegisterCourse.Teacher.Name.ToLower().Contains(teacherName.ToLower()) &&
+                    r.RegisterCourse.Course.Name.ToLower().Contains(courseName.ToLower())))
+                .Select(s => new StudentDTO
+                {
+                    Name = s.Name,
+                    Email = s.Email,
+                    PhoneNumber = s.PhoneNumber,
+                    City = s.City
+                })
+                .ToListAsync();
+
+            if (students == null || students.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(students);
+        }
+
     }
 }
