@@ -10,7 +10,7 @@ namespace WebApplication2.DataAccess.Models
         public string PhoneNumber { get; set; }
         public string City { get; set; }
         
-        public List<RegistrationModel> RegistredCources { get; set; }
+        public List<RegistrationModel> ?RegistredCources { get; set; }
 
     }
 }

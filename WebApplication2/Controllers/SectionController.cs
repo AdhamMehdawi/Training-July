@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WebApplication2.DataAccess;
 using WebApplication2.DataAccess.Models;
 
@@ -89,6 +91,42 @@ namespace WebApplication2.Controllers
             return Ok(cor);
 
         }
+        [HttpGet("SerchByName")]
+        public IActionResult search(string name)
+        {
+           
+            var sec=_context.Section.Where(t => t.Name.Contains(name)).ToList();
+            List<SsectionDT> sections = new List<SsectionDT>();
+            if (sec == null)
+            {
+                return NotFound();
+            }
+            foreach (var x in sec)
+                {
+                sections.Add(new SsectionDT()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                });
+            }
+
+
+            return Ok(sections);
+        }
+        [HttpGet("SerchByNameQuery")]
+        public IActionResult searchQ(string name,int a)
+        {
+
+            var sec = _context.Section.Where(t => t.Name.Contains(name));
+            var stringQuery = sec.ToQueryString();    
+            if(a==1)
+            {
+                return Ok(stringQuery);
+            }
+            return Ok("Please send a as 1");
+        }
+
+
 
     }
 }

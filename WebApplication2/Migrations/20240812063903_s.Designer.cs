@@ -12,8 +12,8 @@ using WebApplication2.DataAccess;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(MyDatabase))]
-    [Migration("20240811090446_CreateTeacherTable")]
-    partial class CreateTeacherTable
+    [Migration("20240812063903_s")]
+    partial class s
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,11 +50,11 @@ namespace WebApplication2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CourceId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("SectionCourseId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SemesterId")
                         .HasColumnType("int");
@@ -64,7 +64,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourceId");
+                    b.HasIndex("SectionCourseId");
 
                     b.HasIndex("SemesterId");
 
@@ -122,6 +122,33 @@ namespace WebApplication2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Section");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "A1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "A2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "A4"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "A4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "A5"
+                        });
                 });
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>
@@ -189,9 +216,9 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
                 {
-                    b.HasOne("WebApplication2.DataAccess.Models.CourceModel", "CourceModel")
+                    b.HasOne("WebApplication2.DataAccess.Models.SectionCorseModel", "SectionCourse")
                         .WithMany("RegistredStudents")
-                        .HasForeignKey("CourceId")
+                        .HasForeignKey("SectionCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -207,7 +234,7 @@ namespace WebApplication2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CourceModel");
+                    b.Navigation("SectionCourse");
 
                     b.Navigation("SemesterModel");
 
@@ -243,9 +270,12 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.CourceModel", b =>
                 {
-                    b.Navigation("RegistredStudents");
-
                     b.Navigation("SectionCorse");
+                });
+
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCorseModel", b =>
+                {
+                    b.Navigation("RegistredStudents");
                 });
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionModel", b =>

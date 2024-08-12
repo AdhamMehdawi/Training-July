@@ -21,7 +21,7 @@ namespace WebApplication2
             builder.Services.AddDbContext<MyDatabase>(option =>
             {
                 option.UseSqlServer(
-                    "Server=.;Database=SchoolDb101;TrustServerCertificate=True;MultipleActiveResultSets=true;User Id=sa; Password=Admin123#");
+                   "Server=.;Database=school1002;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;");
             });
 
             var app = builder.Build();
