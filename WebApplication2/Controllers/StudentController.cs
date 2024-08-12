@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.DataAccess;
 using WebApplication2.DataAccess.Models;
@@ -44,14 +45,8 @@ namespace WebApplication2.Controllers
             {
                 return BadRequest();
             }
-            var stu = new StudentModel()
-            {
-               
-                Name = student.Name,
-                Email = student.Email,
-                PhoneNumber = student.Phone,
-                City = student.City
-            };
+            var stu= student.Adapt<StudentModel>();
+            
 
             _context.Students.Add(stu);
             _context.SaveChanges();
@@ -83,11 +78,7 @@ namespace WebApplication2.Controllers
             {
                 return Ok("student dose not exist");
             }
-            stu.Id = student.Id;
-            stu.Name = student.Name;
-            stu.Email = student.Email;
-            stu.PhoneNumber = student.Phone;
-            stu.City = student.City;
+            stu = student.Adapt<StudentModel>();
             _context.SaveChanges();
             return Ok();
         }

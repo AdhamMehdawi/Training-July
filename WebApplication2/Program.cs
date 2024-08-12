@@ -1,6 +1,8 @@
 
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DataAccess;
+using WebApplication2.DataAccess.Models;
 
 namespace WebApplication2
 {
@@ -10,10 +12,16 @@ namespace WebApplication2
         { 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            
+            TypeAdapterConfig.GlobalSettings
+              .NewConfig<StudentDt,StudentModel >()
+              .Map(dest => dest.Id, src => src.Id)
+              .Map(dest => dest.Name, src => src.Name)
+              .Map(dest => dest.Email, src => src.Email)
+              .Map(dest => dest.PhoneNumber, src => src.Phone)
+              .Map(dest => dest.City, src => src.City);
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<TestMath>();
