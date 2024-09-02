@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication2.DataAccess.Models;
 using WebApplication2.Entities;
 
 namespace WebApplication2
@@ -18,6 +19,8 @@ namespace WebApplication2
         public DbSet<TeacherModel> Teachers { get; set; }
         public DbSet<CourseTimesModel> CourseTimes { get; set; }
         public DbSet<HallModel> Halls { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +64,10 @@ namespace WebApplication2
                 .HasForeignKey(ct => ct.HallId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<RegisterStudentModel>()
+               .HasMany(r => r.StudentAssignments)
+               .WithOne(a => a.Registration)
+               .HasForeignKey(a => a.RegistrationId);
 
 
             modelBuilder.Entity<SemesterModel>()

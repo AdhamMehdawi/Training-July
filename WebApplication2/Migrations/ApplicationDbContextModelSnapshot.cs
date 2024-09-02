@@ -22,6 +22,38 @@ namespace WebApplication2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegistrationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegistrationId");
+
+                    b.ToTable("Assignments");
+                });
+
             modelBuilder.Entity("WebApplication2.Entities.BranchModel", b =>
                 {
                     b.Property<int>("Id")
@@ -154,9 +186,6 @@ namespace WebApplication2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RegisterCourseId")
                         .HasColumnType("int");
 
@@ -243,6 +272,17 @@ namespace WebApplication2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assignment", b =>
+                {
+                    b.HasOne("WebApplication2.Entities.RegisterStudentModel", "Register")
+                        .WithMany("StudentAssignments")
+                        .HasForeignKey("RegistrationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Register");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.CourseTimesModel", b =>
@@ -338,6 +378,11 @@ namespace WebApplication2.Migrations
                     b.Navigation("CourseTimes");
 
                     b.Navigation("RegisterStudents");
+                });
+
+            modelBuilder.Entity("WebApplication2.Entities.RegisterStudentModel", b =>
+                {
+                    b.Navigation("StudentAssignments");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.SemesterModel", b =>

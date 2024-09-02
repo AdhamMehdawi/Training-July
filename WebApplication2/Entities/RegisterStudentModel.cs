@@ -1,4 +1,6 @@
-﻿namespace WebApplication2.Entities
+﻿using WebApplication2.DataAccess.Models;
+
+namespace WebApplication2.Entities
 {
     public class RegisterStudentModel
     {
@@ -9,6 +11,7 @@
 
         public StudentModel Student { get; set; }
         public RegisterCourseModel RegisterCourse { get; set; }
+        public ICollection<Assignment> StudentAssignments { get; set; }
     }
 }
  

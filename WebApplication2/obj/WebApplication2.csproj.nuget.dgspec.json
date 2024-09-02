@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\redhat\\source\\repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\WebApplication2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\redhat\\source\\repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\redhat\\source\\repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "C:\\Users\\redhat\\source\\repos\\AdhamMehdawi\\Training-July\\WebApplication2\\WebApplication2.csproj",
-        "packagesPath": "C:\\Users\\redhat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\redhat\\Source\\Repos\\AdhamMehdawi\\Training-July\\WebApplication2\\obj\\",
+        "projectPath": "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\WebApplication2.csproj",
+        "packagesPath": "C:\\Users\\student\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\redhat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\student\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
