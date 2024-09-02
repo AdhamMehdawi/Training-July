@@ -13,5 +13,6 @@ namespace WebApplication2.DataAccess.Models
         public DateTime RegistrationDate { get; set; } 
         public SemesterModel SemesterModel  { get; set; }
         public int SemesterId  { get; set; }
+        public List<Assigment> StudentAssigment  { get; set; }
     }
 }

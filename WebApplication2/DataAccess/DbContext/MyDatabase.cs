@@ -17,6 +17,9 @@ namespace WebApplication2.DataAccess
         public DbSet<SectionModel> Section { get; set; }
         public DbSet<SectionCorseModel> SectionCourse { get; set; }
         public DbSet<TeacherModel> Teachers { get; set; }
+        public DbSet<Assigment> Assigment { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -139,6 +142,18 @@ namespace WebApplication2.DataAccess
                     }
                 });
             });
+
+            modelBuilder.Entity<Assigment>(table =>
+                {
+                    table.HasOne(c=>c.Registration)
+                        .WithMany(c => c.StudentAssigment)
+                        .HasForeignKey(c => c.RegistrationId);
+
+                    table.Property(c => c.Title).IsRequired();
+
+                    table.Property(c => c.Description).HasMaxLength(600);
+                }
+            );
         }
     }
 
