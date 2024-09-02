@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\Users\\EasyLife\\source\\repos\\Training-July\\WebApplication2\\WebApplication2.csproj": {}
   },
   "projects": {
-    "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\Users\\EasyLife\\source\\repos\\Training-July\\WebApplication2\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\EasyLife\\source\\repos\\Training-July\\WebApplication2\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
-        "packagesPath": "C:\\Users\\adham.mehdawi\\.nuget\\packages\\",
-        "outputPath": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\obj\\",
+        "projectPath": "C:\\Users\\EasyLife\\source\\repos\\Training-July\\WebApplication2\\WebApplication2.csproj",
+        "packagesPath": "C:\\Users\\EasyLife\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EasyLife\\source\\repos\\Training-July\\WebApplication2\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\adham.mehdawi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\EasyLife\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -83,7 +84,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.108/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 2f6bb6e8b2a3478eac58ad6ab32e73d6be8085d3
         }
       }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.DataAccess;
 
@@ -11,9 +12,11 @@ using WebApplication2.DataAccess;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(MyDatabase))]
-    partial class MyDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20240814153641_AddNewDataBase")]
+    partial class AddNewDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,34 +25,7 @@ namespace WebApplication2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(600)
-                        .HasColumnType("nvarchar(600)");
-
-                    b.Property<int>("RegistrationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RegistrationId");
-
-                    b.ToTable("Assigment");
-                });
-
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourceModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourseModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1070,17 +1046,6 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
-                {
-                    b.HasOne("WebApplication2.DataAccess.Models.RegistrationModel", "Registration")
-                        .WithMany("StudentAssigment")
-                        .HasForeignKey("RegistrationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Registration");
-                });
-
             modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
                 {
                     b.HasOne("WebApplication2.DataAccess.Models.SectionCourseModel", "SectionCourse")
@@ -1140,12 +1105,7 @@ namespace WebApplication2.Migrations
                     b.Navigation("SectionCourse");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
-                {
-                    b.Navigation("StudentAssigment");
-                });
-
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCorseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCourseModel", b =>
                 {
                     b.Navigation("RegistredStudents");
                 });

@@ -22,7 +22,96 @@ namespace WebApplication2.Controllers
         {
             return Ok(_database.Section.ToList());
         }
+        [HttpGet("GetRegistration")]
+        public IActionResult GetRegistration()
+        {
+            var data = _database.Registration.ToList();
+            var registrationList = new List<RegistrationModel>();
+            foreach (var reg in data)
+            {
+                var student = _database.Students.FirstOrDefault(c => c.Id == reg.StudentId);
+                var sectionCourse = _database.SectionCourse.FirstOrDefault(c => c.Id == reg.SectionCourseId);
+                var semester = _database.Semesters.FirstOrDefault(c => c.SemesterNumber == reg.SemesterId);
 
+                if (student == null || sectionCourse == null || semester == null)
+                {
+                    continue;
+                }
+
+                var registration = new RegistrationModel()
+                {
+                    Id = reg.Id,
+                    StudentId = reg.StudentId,
+                    RegistrationYear = reg.RegistrationYear,
+                    SemesterId = reg.SemesterId,
+                    Student = new StudentModel
+                    {
+                        Id = student.Id,
+                        Name = student.Name,
+                        City = student.City,
+                        Email = student.Email,
+                        PhoneNumber = student.PhoneNumber,
+                    },
+                    SectionCourse = new SectionCourseModel
+                    {
+                        Id = sectionCourse.Id,
+                        courseId = sectionCourse.Id,
+                        SectionId = sectionCourse.Id,
+                        TeacherId = sectionCourse.Id,
+                        EndTime = sectionCourse.EndTime,
+                        StartTime = sectionCourse.StartTime,
+                    },
+                    SemesterModel = new SemesterModel
+                    {
+                        SemesterNumber = semester.SemesterNumber,
+                        SemesterName = semester.SemesterName,
+                    }
+                };
+
+
+                registrationList.Add(registration);
+            }
+/*
+            foreach (var reg in data)
+            {
+                // استخدم FirstOrDefault للعثور على عنصر واحد بدلاً من ToList
+                var student = _database.Students.FirstOrDefault(c => c.Id == reg.StudentId);
+                var sectionCourse = _database.SectionCourse.FirstOrDefault(c => c.Id == reg.SectionCourseId);
+                var semester = _database.Semesters.FirstOrDefault(c => c.SemesterNumber == reg.SemesterId);
+
+                if (student == null || sectionCourse == null || semester == null)
+                {
+                    continue;
+                }
+
+                var registration = new RegistrationModel()
+                {
+                    Id = reg.Id,
+                    StudentId = reg.StudentId,
+                    RegistrationYear = reg.RegistrationYear,
+                    SemesterId = reg.SemesterId,
+                   // Student = student,
+                   // SectionCourse = sectionCourse,
+                   // SemesterModel = semester,
+                };
+
+                registrationList.Add(registration);
+            }
+*/
+            return Ok(registrationList);
+        }
+
+
+        [HttpGet("GetSemesters")]
+        public IActionResult GetSemesters()
+        {
+            return Ok(_database.Semesters.ToList());
+        }
+        [HttpGet("GetTeachers")]
+        public IActionResult GetTeachers()
+        {
+            return Ok(_database.Teachers.ToList());
+        }
         [HttpGet("SearchByName")]
         public IActionResult SearchByName([FromQuery] string name, [FromQuery] int a)
         {
@@ -98,7 +187,7 @@ namespace WebApplication2.Controllers
             {
                 return BadRequest("The student Id does not exists!!");
             }
-            if (!_database.Cources.Any(c => c.Id == reg.CourseId))
+            if (!_database.Courses.Any(c => c.Id == reg.CourseId))
             {
                 return BadRequest("The course Id does not exists!!");
             }
@@ -113,7 +202,7 @@ namespace WebApplication2.Controllers
            else // no data in the section course 
            {
                //create a new row for the section course 
-               var sectionCourse = new SectionCorseModel()
+               var sectionCourse = new SectionCourseModel()
                {
                    SectionId = 1,
                    TeacherId = 1,
@@ -131,7 +220,7 @@ namespace WebApplication2.Controllers
                StudentId = reg.StudentId,
                SemesterId = 1,
                SectionCourseId = sectionCourseId,
-               RegistrationDate = DateTime.Now
+               RegistrationYear = DateTime.Now.Year
            });
            _database.SaveChanges();
 
