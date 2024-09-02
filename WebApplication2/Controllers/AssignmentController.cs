@@ -46,8 +46,14 @@ namespace WebApplication2.Controllers
         [HttpPost("addwithfile")]
         public async Task<IActionResult> AddAssignmentWithFile([FromForm] AssignmentViewModel model, IFormFile? File)
         {
+          
             if (File != null && File.Length > 0)
             {
+                if (File.Length > (5 * 1024 * 1024))
+                {
+                    return BadRequest("Too big. that what she said ");
+                }
+
                 var uploadsDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
 
                 if (!Directory.Exists(uploadsDirectory))
@@ -81,8 +87,14 @@ namespace WebApplication2.Controllers
         [HttpPost("addWithFileToDatabase")]
         public async Task<IActionResult> AddWithFileToDatabase([FromForm] AssignmentViewModel model, IFormFile? File)
         {
+
             if (File != null && File.Length > 0)
             {
+                if (File.Length > (5 * 1024 * 1024))
+                {
+                    return BadRequest("Too big. that what she said ");
+                }
+
                 using (var memoryStream = new MemoryStream())
                 {
                     await File.CopyToAsync(memoryStream);
