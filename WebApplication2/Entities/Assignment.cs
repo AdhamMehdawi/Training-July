@@ -9,6 +9,7 @@ namespace WebApplication2.DataAccess.Models
         public string Description { get; set; }
         public string? FilePath { get; set; }
         public byte[]? FileData { get; set; }
+        public string? FileName { get; set; }
         public int RegistrationId { get; set; } 
         public RegisterStudentModel Registration { get; set; }
 

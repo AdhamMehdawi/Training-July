@@ -78,7 +78,8 @@ namespace WebApplication2.Controllers
                     Title = model.Title,
                     Description = model.Description,
                     RegistrationId = model.RegistrationId,
-                    FilePath = filePath
+                    FilePath = filePath,
+                    FileName = File.FileName
                 };
 
                 _context.Assignments.Add(assignment);
@@ -110,6 +111,7 @@ namespace WebApplication2.Controllers
                         Description = model.Description,
                         RegistrationId = model.RegistrationId,
                         FileData = memoryStream.ToArray(),
+                        FileName = File.FileName
                     };
 
                     _context.Assignments.Add(assignment);
@@ -121,5 +123,55 @@ namespace WebApplication2.Controllers
 
             return BadRequest("No file provided.");
         }
+
+        [HttpGet("downloadFromFileSystem/{id}")]
+        public async Task<IActionResult> DownloadFromFileSystem(int id)
+        {
+            var assignment = await _context.Assignments.FindAsync(id);
+            if (assignment == null || string.IsNullOrEmpty(assignment.FilePath))
+            {
+                return NotFound("Assignment or file not found.");
+            }
+
+            var filePath = assignment.FilePath;
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("File not found on server.");
+            }
+
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var fileName = Path.GetFileName(filePath);
+
+            return File(fileBytes, "application/octet-stream", fileName);
+        }
+        
+
+
+        [HttpGet("downloadFromDatabase/{id}")]
+        public async Task<IActionResult> DownloadFromDatabase(int id)
+        {
+            var assignment = await _context.Assignments.FindAsync(id);
+            if (assignment == null || assignment.FileData == null || assignment.FileData.Length == 0)
+            {
+                return NotFound("Assignment or file not found.");
+            }
+
+            var fileName = assignment.FileName;
+            var fileExtension = Path.GetExtension(fileName);
+
+            string mimeType;
+            var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(fileName, out mimeType))
+            {
+                mimeType = "application/octet-stream";
+            }
+
+            return File(assignment.FileData, mimeType, fileName);
+        }
+
+
+
     }
+
+
 }

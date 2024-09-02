@@ -37,6 +37,9 @@ namespace WebApplication2.Migrations
                     b.Property<byte[]>("FileData")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
@@ -276,13 +279,13 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.DataAccess.Models.Assignment", b =>
                 {
-                    b.HasOne("WebApplication2.Entities.RegisterStudentModel", "Register")
+                    b.HasOne("WebApplication2.Entities.RegisterStudentModel", "Registration")
                         .WithMany("StudentAssignments")
                         .HasForeignKey("RegistrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Register");
+                    b.Navigation("Registration");
                 });
 
             modelBuilder.Entity("WebApplication2.Entities.CourseTimesModel", b =>
