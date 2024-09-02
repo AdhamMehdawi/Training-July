@@ -12,8 +12,8 @@ using WebApplication2.DataAccess;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(MyDatabase))]
-    [Migration("20240814153641_AddNewDataBase")]
-    partial class AddNewDataBase
+    [Migration("20240902085323_AddNewFeildsToAssigment")]
+    partial class AddNewFeildsToAssigment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,46 @@ namespace WebApplication2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CourseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<byte[]>("FileContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegistrationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegistrationId");
+
+                    b.ToTable("Assigment");
+                });
+
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourseModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,13 +133,16 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RegistrationModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RegistrationYear")
                         .HasColumnType("int");
@@ -128,6 +170,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 1,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -136,6 +179,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 2,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -144,6 +188,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 3,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -152,6 +197,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 4,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -160,6 +206,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 5,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -168,6 +215,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 6,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -176,6 +224,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 7,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 1,
                             SemesterId = 1,
@@ -184,6 +233,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 8,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -192,6 +242,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 9,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -200,6 +251,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 10,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -208,6 +260,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 11,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -216,6 +269,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 12,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -224,6 +278,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 13,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -232,6 +287,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 14,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 2,
                             SemesterId = 1,
@@ -240,6 +296,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 15,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -248,6 +305,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 16,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -256,6 +314,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 17,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -264,6 +323,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 18,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -272,6 +332,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 19,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -280,6 +341,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 20,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -288,6 +350,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 21,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 3,
                             SemesterId = 1,
@@ -296,6 +359,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 22,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -304,6 +368,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 23,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -312,6 +377,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 24,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -320,6 +386,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 25,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -328,6 +395,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 26,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -336,6 +404,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 27,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -344,6 +413,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 28,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 4,
                             SemesterId = 1,
@@ -352,6 +422,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 29,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -360,6 +431,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 30,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -368,6 +440,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 31,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -376,6 +449,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 32,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -384,6 +458,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 33,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -392,6 +467,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 34,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -400,6 +476,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 35,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 5,
                             SemesterId = 1,
@@ -408,6 +485,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 36,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -416,6 +494,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 37,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -424,6 +503,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 38,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -432,6 +512,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 39,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -440,6 +521,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 40,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -448,6 +530,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 41,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -456,6 +539,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 42,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 6,
                             SemesterId = 1,
@@ -464,6 +548,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 43,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -472,6 +557,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 44,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -480,6 +566,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 45,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -488,6 +575,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 46,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -496,6 +584,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 47,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -504,6 +593,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 48,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -512,6 +602,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 49,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 7,
                             SemesterId = 1,
@@ -520,6 +611,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 50,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -528,6 +620,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 51,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -536,6 +629,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 52,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -544,6 +638,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 53,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -552,6 +647,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 54,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -560,6 +656,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 55,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -568,6 +665,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 56,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 8,
                             SemesterId = 1,
@@ -576,6 +674,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 57,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -584,6 +683,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 58,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -592,6 +692,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 59,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -600,6 +701,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 60,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -608,6 +710,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 61,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -616,6 +719,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 62,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -624,6 +728,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 63,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 9,
                             SemesterId = 1,
@@ -632,6 +737,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 64,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -640,6 +746,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 65,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -648,6 +755,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 66,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -656,6 +764,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 67,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -664,6 +773,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 68,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -672,6 +782,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 69,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -680,6 +791,7 @@ namespace WebApplication2.Migrations
                         new
                         {
                             Id = 70,
+                            RegistrationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RegistrationYear = 2024,
                             SectionCourseId = 10,
                             SemesterId = 1,
@@ -687,7 +799,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SectionCourseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCourseModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -813,7 +925,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SectionModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -857,7 +969,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SemesterModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>
                 {
                     b.Property<int>("SemesterNumber")
                         .ValueGeneratedOnAdd()
@@ -891,7 +1003,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StudentModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.StudentModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1002,7 +1114,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TeacherModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.TeacherModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1046,21 +1158,32 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RegistrationModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
                 {
-                    b.HasOne("SectionCourseModel", "SectionCourse")
+                    b.HasOne("WebApplication2.DataAccess.Models.RegistrationModel", "Registration")
+                        .WithMany("StudentAssigment")
+                        .HasForeignKey("RegistrationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Registration");
+                });
+
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
+                {
+                    b.HasOne("WebApplication2.DataAccess.Models.SectionCourseModel", "SectionCourse")
                         .WithMany("RegistredStudents")
                         .HasForeignKey("SectionCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SemesterModel", "SemesterModel")
+                    b.HasOne("WebApplication2.DataAccess.Models.SemesterModel", "SemesterModel")
                         .WithMany("Registration")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentModel", "Student")
+                    b.HasOne("WebApplication2.DataAccess.Models.StudentModel", "Student")
                         .WithMany("RegistredCourses")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1073,21 +1196,21 @@ namespace WebApplication2.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("SectionCourseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCourseModel", b =>
                 {
-                    b.HasOne("SectionModel", "Section")
+                    b.HasOne("WebApplication2.DataAccess.Models.SectionModel", "Section")
                         .WithMany("CourseSection")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TeacherModel", "Teacher")
+                    b.HasOne("WebApplication2.DataAccess.Models.TeacherModel", "Teacher")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseModel", "course")
+                    b.HasOne("WebApplication2.DataAccess.Models.CourseModel", "course")
                         .WithMany("SectionCourse")
                         .HasForeignKey("courseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1100,32 +1223,37 @@ namespace WebApplication2.Migrations
                     b.Navigation("course");
                 });
 
-            modelBuilder.Entity("CourseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourseModel", b =>
                 {
                     b.Navigation("SectionCourse");
                 });
 
-            modelBuilder.Entity("SectionCourseModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
+                {
+                    b.Navigation("StudentAssigment");
+                });
+
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCourseModel", b =>
                 {
                     b.Navigation("RegistredStudents");
                 });
 
-            modelBuilder.Entity("SectionModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionModel", b =>
                 {
                     b.Navigation("CourseSection");
                 });
 
-            modelBuilder.Entity("SemesterModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>
                 {
                     b.Navigation("Registration");
                 });
 
-            modelBuilder.Entity("StudentModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.StudentModel", b =>
                 {
                     b.Navigation("RegistredCourses");
                 });
 
-            modelBuilder.Entity("TeacherModel", b =>
+            modelBuilder.Entity("WebApplication2.DataAccess.Models.TeacherModel", b =>
                 {
                     b.Navigation("Courses");
                 });

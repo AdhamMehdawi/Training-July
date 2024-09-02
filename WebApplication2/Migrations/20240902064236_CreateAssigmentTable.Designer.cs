@@ -25,7 +25,7 @@ namespace WebApplication2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
+            modelBuilder.Entity("Assigment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace WebApplication2.Migrations
                     b.ToTable("Assigment");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourceModel", b =>
+            modelBuilder.Entity("CourceModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
+            modelBuilder.Entity("RegistrationModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace WebApplication2.Migrations
                     b.ToTable("Registration");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCorseModel", b =>
+            modelBuilder.Entity("SectionCorseModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace WebApplication2.Migrations
                     b.ToTable("SectionCourse");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionModel", b =>
+            modelBuilder.Entity("SectionModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +185,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>
+            modelBuilder.Entity("SemesterModel", b =>
                 {
                     b.Property<int>("SemesterNumber")
                         .ValueGeneratedOnAdd()
@@ -209,7 +209,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.StudentModel", b =>
+            modelBuilder.Entity("StudentModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -248,7 +248,7 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.TeacherModel", b =>
+            modelBuilder.Entity("TeacherModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -272,9 +272,9 @@ namespace WebApplication2.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.Assigment", b =>
+            modelBuilder.Entity("Assigment", b =>
                 {
-                    b.HasOne("WebApplication2.DataAccess.Models.RegistrationModel", "Registration")
+                    b.HasOne("RegistrationModel", "Registration")
                         .WithMany("StudentAssigment")
                         .HasForeignKey("RegistrationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -283,21 +283,21 @@ namespace WebApplication2.Migrations
                     b.Navigation("Registration");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
+            modelBuilder.Entity("RegistrationModel", b =>
                 {
-                    b.HasOne("WebApplication2.DataAccess.Models.SectionCorseModel", "SectionCourse")
+                    b.HasOne("SectionCorseModel", "SectionCourse")
                         .WithMany("RegistredStudents")
                         .HasForeignKey("SectionCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication2.DataAccess.Models.SemesterModel", "SemesterModel")
+                    b.HasOne("SemesterModel", "SemesterModel")
                         .WithMany("Registration")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication2.DataAccess.Models.StudentModel", "Student")
+                    b.HasOne("StudentModel", "Student")
                         .WithMany("RegistredCources")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -310,21 +310,21 @@ namespace WebApplication2.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCorseModel", b =>
+            modelBuilder.Entity("SectionCorseModel", b =>
                 {
-                    b.HasOne("WebApplication2.DataAccess.Models.SectionModel", "Section")
+                    b.HasOne("SectionModel", "Section")
                         .WithMany("CourseSection")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication2.DataAccess.Models.TeacherModel", "Teacher")
+                    b.HasOne("TeacherModel", "Teacher")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication2.DataAccess.Models.CourceModel", "course")
+                    b.HasOne("CourceModel", "course")
                         .WithMany("SectionCorse")
                         .HasForeignKey("courseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -337,37 +337,37 @@ namespace WebApplication2.Migrations
                     b.Navigation("course");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.CourceModel", b =>
+            modelBuilder.Entity("CourceModel", b =>
                 {
                     b.Navigation("SectionCorse");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.RegistrationModel", b =>
+            modelBuilder.Entity("RegistrationModel", b =>
                 {
                     b.Navigation("StudentAssigment");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionCorseModel", b =>
+            modelBuilder.Entity("SectionCorseModel", b =>
                 {
                     b.Navigation("RegistredStudents");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SectionModel", b =>
+            modelBuilder.Entity("SectionModel", b =>
                 {
                     b.Navigation("CourseSection");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.SemesterModel", b =>
+            modelBuilder.Entity("SemesterModel", b =>
                 {
                     b.Navigation("Registration");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.StudentModel", b =>
+            modelBuilder.Entity("StudentModel", b =>
                 {
                     b.Navigation("RegistredCources");
                 });
 
-            modelBuilder.Entity("WebApplication2.DataAccess.Models.TeacherModel", b =>
+            modelBuilder.Entity("TeacherModel", b =>
                 {
                     b.Navigation("Courses");
                 });
