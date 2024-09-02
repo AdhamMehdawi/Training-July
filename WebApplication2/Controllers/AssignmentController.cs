@@ -17,7 +17,6 @@ namespace WebApplication2.Controllers
         private readonly IWebHostEnvironment _hostingEnvironment;
         private ApplicationDbContext _context;
 
-
         public AssignmentController(IWebHostEnvironment hostingEnvironment, ApplicationDbContext myDatabase)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -27,7 +26,7 @@ namespace WebApplication2.Controllers
         [HttpPost("add")]
         public IActionResult AddAssignment([FromBody] AssignmentViewModel assignmentView)
         {
-            if(assignmentView == null || assignmentView.RegistrationId<=0)
+            if (assignmentView == null || assignmentView.RegistrationId <= 0)
             {
                 return BadRequest("Assignment data is missing.");
             }
@@ -41,17 +40,14 @@ namespace WebApplication2.Controllers
             return Ok("Assignment added successfully.");
         }
 
-
-
         [HttpPost("addwithfile")]
         public async Task<IActionResult> AddAssignmentWithFile([FromForm] AssignmentViewModel model, IFormFile? File)
         {
-          
             if (File != null && File.Length > 0)
             {
                 if (File.Length > (5 * 1024 * 1024))
                 {
-                    return BadRequest("Too big. that what she said ");
+                    return BadRequest("File size exceeds the limit.");
                 }
 
                 var uploadsDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
@@ -62,6 +58,15 @@ namespace WebApplication2.Controllers
                 }
 
                 var filePath = Path.Combine(uploadsDirectory, File.FileName);
+                int fileCount = 1;
+
+                while (System.IO.File.Exists(filePath))
+                {
+                    var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(File.FileName);
+                    var extension = Path.GetExtension(File.FileName);
+                    filePath = Path.Combine(uploadsDirectory, $"{fileNameWithoutExtension}_{fileCount}{extension}");
+                    fileCount++;
+                }
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -84,15 +89,15 @@ namespace WebApplication2.Controllers
 
             return BadRequest("No file provided.");
         }
+
         [HttpPost("addWithFileToDatabase")]
         public async Task<IActionResult> AddWithFileToDatabase([FromForm] AssignmentViewModel model, IFormFile? File)
         {
-
             if (File != null && File.Length > 0)
             {
                 if (File.Length > (5 * 1024 * 1024))
                 {
-                    return BadRequest("Too big. that what she said ");
+                    return BadRequest("File size exceeds the limit.");
                 }
 
                 using (var memoryStream = new MemoryStream())
@@ -116,6 +121,5 @@ namespace WebApplication2.Controllers
 
             return BadRequest("No file provided.");
         }
-
     }
 }
