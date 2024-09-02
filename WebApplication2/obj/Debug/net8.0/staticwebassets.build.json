@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aX+8TD9KCy0YK3D3YWaujp0kZxcV9FocTn09AWlHg5g=",
+  "Hash": "4NzK0WqMRwTzj3OFzwLR9G7xULa0aoirv0VYPSX5VK8=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\wwwroot\\uploads\\1- Introduction and Initial Configuration.pptx",
+      "SourceId": "WebApplication2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\student\\Desktop\\ww\\Training-July\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/WebApplication2",
+      "RelativePath": "uploads/1- Introduction and Initial Configuration.pptx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1- Introduction and Initial Configuration.pptx"
+    }
+  ]
 }

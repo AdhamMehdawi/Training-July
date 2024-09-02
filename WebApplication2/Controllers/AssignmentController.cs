@@ -78,6 +78,32 @@ namespace WebApplication2.Controllers
 
             return BadRequest("No file provided.");
         }
+        [HttpPost("addWithFileToDatabase")]
+        public async Task<IActionResult> AddWithFileToDatabase([FromForm] AssignmentViewModel model, IFormFile? File)
+        {
+            if (File != null && File.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await File.CopyToAsync(memoryStream);
+
+                    Assignment assignment = new Assignment
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        RegistrationId = model.RegistrationId,
+                        FileData = memoryStream.ToArray(),
+                    };
+
+                    _context.Assignments.Add(assignment);
+                    _context.SaveChanges();
+
+                    return Ok("Assignment and file uploaded successfully.");
+                }
+            }
+
+            return BadRequest("No file provided.");
+        }
 
     }
 }
