@@ -19,24 +19,34 @@ namespace WebApplication2.Controllers
 
 
         [HttpPost]
-        public IActionResult CrateAssigment( IFormFile file )
+        public IActionResult CrateAssigment(IFormFile file)
         {
-            if ( file.Length > (5 * 1024 * 1024))
+            if (file.Length > (5 * 1024 * 1024))
             {
                 return BadRequest("The fle size is grater than  5mb");
             }
-            var path = SaveFileToLocalPath(file); 
-            var assigment = new Assigment 
+            var path = SaveFileToLocalPath(file);
+            var fileContent = ConvertToStream(file);
+
+            var assigment = new Assigment
             {
                 Description = "Description",
                 Title = "Title",
                 RegistrationId = 2,
                 FileName = file.FileName,
-                FilePath = path
+                FilePath = path,
+                FileContent = fileContent
             };
             _database.Assigment.Add(assigment);
             _database.SaveChanges();
             return Ok(assigment);
+        }
+
+        private byte[] ConvertToStream(IFormFile file)
+        {
+            var memoryStream = new MemoryStream();
+            file.CopyTo(memoryStream);
+            return memoryStream.ToArray();
         }
 
         private string SaveFileToLocalPath(IFormFile file)
@@ -47,8 +57,8 @@ namespace WebApplication2.Controllers
             if (Path.Exists(filepath))
             {
                 var filenameChange = file.FileName.Split('.');
-                var newFileName= filenameChange[0]+"(1)"+filenameChange[1];
-                filepath= Path.Combine(Directory.GetCurrentDirectory(),
+                var newFileName = filenameChange[0] + "(1)" + filenameChange[1];
+                filepath = Path.Combine(Directory.GetCurrentDirectory(),
                     "wwwroot/uploads",
                     newFileName);
                 var streem = new FileStream(filepath, FileMode.Create);
@@ -61,7 +71,7 @@ namespace WebApplication2.Controllers
                 file.CopyTo(streem);
                 return filepath;
             }
-        
+
         }
 
 
@@ -71,20 +81,20 @@ namespace WebApplication2.Controllers
             var result = _database.Registration
                 .Where(c => c.StudentId == studentId)
                 .ToList();
-       
+
             return Ok(result);
         }
 
     }
 
-    public class  AssigmentModel 
+    public class AssigmentModel
     {
         [Required]
         public string Title { get; set; }
         [Required]
         [MaxLength(600)]
         public string Description { get; set; }
-        public int RegistrationId { get; set; } 
+        public int RegistrationId { get; set; }
         public IFormFile File { get; set; }
     }
 }

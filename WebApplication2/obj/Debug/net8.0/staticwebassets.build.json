@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Up2OZRfcAqvEFTohONA+9+pmtNwrHncAF44lNj+nzXo=",
+  "Hash": "za01KQ269+8Eo6cHusWMU9GobQmhfY5P5LeKjWixbFA=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1706719526383(1)gif",
+      "SourceId": "WebApplication2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/WebApplication2",
+      "RelativePath": "uploads/1706719526383(1)gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1706719526383(1)gif"
+    },
     {
       "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1706719526383.gif",
       "SourceId": "WebApplication2",
