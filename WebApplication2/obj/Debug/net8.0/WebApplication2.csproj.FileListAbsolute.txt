@@ -272,3 +272,4 @@ D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.pdb
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.genruntimeconfig.cache
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\ref\WebApplication2.dll
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\WebApplication2.staticwebassets.runtime.json

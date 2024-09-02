@@ -21,15 +21,47 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult CrateAssigment( IFormFile file )
         {
-            var assigment = new Assigment();
-            //{
-            //    Description = assigmentModel.Description,
-            //    Title = assigmentModel.Title,
-            //    RegistrationId = assigmentModel.RegistrationId,
-            //};
+            if ( file.Length > (5 * 1024 * 1024))
+            {
+                return BadRequest("The fle size is grater than  5mb");
+            }
+            var path = SaveFileToLocalPath(file); 
+            var assigment = new Assigment 
+            {
+                Description = "Description",
+                Title = "Title",
+                RegistrationId = 2,
+                FileName = file.FileName,
+                FilePath = path
+            };
             _database.Assigment.Add(assigment);
             _database.SaveChanges();
             return Ok(assigment);
+        }
+
+        private string SaveFileToLocalPath(IFormFile file)
+        {
+            var filepath = Path.Combine(Directory.GetCurrentDirectory(),
+                "wwwroot/uploads",
+                file.FileName);
+            if (Path.Exists(filepath))
+            {
+                var filenameChange = file.FileName.Split('.');
+                var newFileName= filenameChange[0]+"(1)"+filenameChange[1];
+                filepath= Path.Combine(Directory.GetCurrentDirectory(),
+                    "wwwroot/uploads",
+                    newFileName);
+                var streem = new FileStream(filepath, FileMode.Create);
+                file.CopyTo(streem);
+                return filepath;
+            }
+            else
+            {
+                var streem = new FileStream(filepath, FileMode.Create);
+                file.CopyTo(streem);
+                return filepath;
+            }
+        
         }
 
 
