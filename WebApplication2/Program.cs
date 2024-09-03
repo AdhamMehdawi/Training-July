@@ -1,9 +1,11 @@
 
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication2.DataAccess;
+using WebApplication2.DataAccess.Models;
 
 namespace WebApplication2
 {
@@ -46,6 +48,12 @@ namespace WebApplication2
                                     .GetBytes("mDMEY80SdRYJKwYBBAHaRw8BAQdAPRHN6MR+NQOCgMBSk0a69VPhRQMAJHcZgDv4\r\nY8+qxPG0JkNhcnBhdGggPGFkaGFtLm1laGRhd2lAaWNvbm5lY3Rocy5jb20+iJkE\r\n"))
                     };
                 });
+            //solving the problem
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<MyDatabase>()
+            .AddDefaultTokenProviders();
+
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddAuthorization(option =>
             {
