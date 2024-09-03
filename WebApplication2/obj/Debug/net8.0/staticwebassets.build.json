@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nH/u6kyAPa0EbGIUheFYGiG4iqJtV9fQ5PAHbqsJyQQ=",
+  "Hash": "fz1nOofOhFe9Hfa/UdZAriao5KKrccp+HkAht62DESo=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "WebApplication2\\wwwroot",
       "Source": "WebApplication2",
-      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1706719526383(1)gif",
+      "Identity": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\uploads\\1706719526383(1)gif",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "uploads/1706719526383(1)gif",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\1706719526383(1)gif"
     },
     {
-      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1706719526383.gif",
+      "Identity": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\uploads\\1706719526383.gif",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "uploads/1706719526383.gif",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\1706719526383.gif"
     },
     {
-      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1714837524869.jpeg",
+      "Identity": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\uploads\\1714837524869.jpeg",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "uploads/1714837524869.jpeg",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\1714837524869.jpeg"
     },
     {
-      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1721111409311.jpg",
+      "Identity": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\uploads\\1721111409311.jpg",
       "SourceId": "WebApplication2",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\novo\\Documents\\GitHub\\Training-July\\WebApplication2\\wwwroot\\",
       "BasePath": "_content/WebApplication2",
       "RelativePath": "uploads/1721111409311.jpg",
       "AssetKind": "All",
