@@ -54,6 +54,7 @@ namespace WebApplication2
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
             builder.Services.AddScoped<TestMath>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<ITokenService, TokenService>();

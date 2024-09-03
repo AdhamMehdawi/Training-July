@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApplication2.DTOs;
 using WebApplication2.Entities;
 using WebApplication2.Services.TokenService;
+using System.Collections.Generic;
 
 namespace WebApplication2.Controllers
 {
@@ -11,17 +15,16 @@ namespace WebApplication2.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private ApplicationDbContext _context;
-        private UserManager<AppUser> _userManager;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
 
-        public AccountController (ApplicationDbContext context, UserManager<AppUser> userManager, ITokenService tokenService)
+        public AccountController(ApplicationDbContext context, UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _context = context;
             _userManager = userManager;
             _tokenService = tokenService;
         }
-
 
         [HttpPost("createUser")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUser user)
@@ -31,36 +34,50 @@ namespace WebApplication2.Controllers
                 return BadRequest("User data is missing.");
             }
 
-            var appUser = new AppUser
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
-                UserName = user.Email,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                DateOfBirth = user.DateOfBirth,
-                DateCreated = DateTime.UtcNow
-            };
-
-            var result = await _userManager.CreateAsync(appUser, user.Password);
-
-            if (result.Succeeded)
-            {
-                if (user.Roles != null && user.Roles.Any())
+                try
                 {
-                    var roleResult = await _userManager.AddToRolesAsync(appUser, user.Roles);
-                    if (!roleResult.Succeeded)
+                    var appUser = new AppUser
                     {
-                        await _userManager.DeleteAsync(appUser);
-                        return BadRequest(roleResult.Errors);
+                        UserName = user.Email,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        DateOfBirth = user.DateOfBirth,
+                        DateCreated = DateTime.UtcNow
+                    };
+
+                    var result = await _userManager.CreateAsync(appUser, user.Password);
+
+                    if (!result.Succeeded)
+                    {
+                        return BadRequest(new { Errors = result.Errors.Select(e => e.Description).ToList() });
                     }
+
+                    if (user.Roles != null && user.Roles.Any())
+                    {
+                        var roleResult = await _userManager.AddToRolesAsync(appUser, user.Roles);
+                        if (!roleResult.Succeeded)
+                        {
+                            await _userManager.DeleteAsync(appUser); 
+                            await transaction.RollbackAsync();
+                            return BadRequest(new { Errors = roleResult.Errors.Select(e => e.Description).ToList() });
+                        }
+                    }
+
+                    await transaction.CommitAsync();
+                    return Ok(user);
                 }
-
-                return Ok(user);
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Errors = new List<string> { $"Error creating user: {ex.Message}" } });
+                }
             }
-
-            return BadRequest(ModelState);
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto user)
         {
@@ -92,6 +109,4 @@ namespace WebApplication2.Controllers
             return BadRequest("Invalid email or password.");
         }
     }
-
-    
 }
