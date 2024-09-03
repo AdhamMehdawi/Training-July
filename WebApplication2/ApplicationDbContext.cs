@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WebApplication2.DataAccess.Models;
 using WebApplication2.Entities;
 
 namespace WebApplication2
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -20,6 +22,7 @@ namespace WebApplication2
         public DbSet<CourseTimesModel> CourseTimes { get; set; }
         public DbSet<HallModel> Halls { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,6 +82,12 @@ namespace WebApplication2
             modelBuilder.Entity<StudentModel>().HasKey(s => s.Id);
             modelBuilder.Entity<CourseModel>().HasKey(c => c.Id);
             modelBuilder.Entity<TeacherModel>().HasKey(t => t.Id);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Name = "Student", NormalizedName = "STUDENT" },
+                new IdentityRole { Name = "Teacher", NormalizedName = "TEACHER" }
+);
         }
     }
 }

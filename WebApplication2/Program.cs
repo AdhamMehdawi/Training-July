@@ -1,8 +1,10 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebApplication2.Entities;
 using WebApplication2.Services.Math;
 using WebApplication2.Services.TokenService;
 
@@ -29,15 +31,29 @@ namespace WebApplication2
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
+                        ClockSkew = TimeSpan.Zero,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
                 });
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Admin"));
+                options.AddPolicy("Student", policy => policy.RequireClaim("Student"));
+                options.AddPolicy("Teacher", policy => policy.RequireClaim("Teacher"));
+                //addpolict with multiple claims
+                options.AddPolicy("AdminOrTeacher", policy => policy.RequireAssertion(context =>
+                {
+                    return context.User.HasClaim(c => c.Type == "Admin") || context.User.HasClaim(c => c.Type == "Teacher");
+                }));
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
             builder.Services.AddScoped<TestMath>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<ITokenService, TokenService>();

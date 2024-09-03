@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApplication2.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize (Policy = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class RegisterStudentController : ControllerBase
