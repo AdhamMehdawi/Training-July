@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebApplication2.DataAccess.Models;
 
 namespace WebApplication2.DataAccess
 {
-    public class MyDatabase : DbContext
+    public class MyDatabase : IdentityDbContext<AppUser>
     {
         public MyDatabase(DbContextOptions options) : base(options)
         {
@@ -18,6 +20,7 @@ namespace WebApplication2.DataAccess
         public DbSet<SectionCourseModel> SectionCourse { get; set; }
         public DbSet<TeacherModel> Teachers { get; set; }
         public DbSet<Assigment> Assigment { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
 
 
 
