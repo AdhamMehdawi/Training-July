@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
 using WebApplication2.DataAccess;
 using WebApplication2.DataAccess.Models;
 
@@ -17,6 +15,11 @@ namespace WebApplication2.Controllers
             _database = database;
         }
 
+        [HttpPost("Test/{id}")]
+        public IActionResult TestPost(int id, [FromQuery] int testval, [FromBody] AssigmentModel model )
+        {
+            return Ok(id+testval);
+        }
 
         [HttpPost]
         public IActionResult CrateAssigment(IFormFile file)

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "za01KQ269+8Eo6cHusWMU9GobQmhfY5P5LeKjWixbFA=",
+  "Hash": "nH/u6kyAPa0EbGIUheFYGiG4iqJtV9fQ5PAHbqsJyQQ=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\1714837524869.jpeg"
+    },
+    {
+      "Identity": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\uploads\\1721111409311.jpg",
+      "SourceId": "WebApplication2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\IronFunctions\\MyCSharpFunction\\WebApplication2\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/WebApplication2",
+      "RelativePath": "uploads/1721111409311.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1721111409311.jpg"
     }
   ]
 }

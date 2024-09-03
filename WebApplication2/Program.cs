@@ -1,5 +1,8 @@
 
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebApplication2.DataAccess;
 
 namespace WebApplication2
@@ -24,6 +27,34 @@ namespace WebApplication2
                     "Server=.;Database=SchoolDb101;TrustServerCertificate=True;MultipleActiveResultSets=true;User Id=sa; Password=Admin123#");
             });
 
+            //register the Auth 
+            builder.Services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                   // option.Audience = "frontend";
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                      //  ValidateLifetime = true, 
+                     //   ValidateAudience = true, 
+                     //   ValidateIssuer = true,
+                      //  ValidAudience = "",
+                      //  ValidIssuer = "",
+                        IssuerSigningKey = new
+                            SymmetricSecurityKey(
+                                Encoding.UTF8
+                                    .GetBytes("mDMEY80SdRYJKwYBBAHaRw8BAQdAPRHN6MR+NQOCgMBSk0a69VPhRQMAJHcZgDv4\r\nY8+qxPG0JkNhcnBhdGggPGFkaGFtLm1laGRhd2lAaWNvbm5lY3Rocy5jb20+iJkE\r\n"))
+                    };
+                });
+
+            builder.Services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminUser", 
+                    policy=> policy.RequireRole("Admin"));
+                option.AddPolicy("StudentUser",
+                    policy => policy.RequireRole("student"));
+            });
+
             var app = builder.Build();
 
             
@@ -36,6 +67,7 @@ namespace WebApplication2
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

@@ -273,3 +273,8 @@ D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.genruntimeconfig.cache
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\obj\Debug\net8.0\ref\WebApplication2.dll
 D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\WebApplication2.staticwebassets.runtime.json
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\IronFunctions\MyCSharpFunction\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
